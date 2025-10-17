@@ -10,7 +10,7 @@ select_lcount = 5
     # Don't touch this
 list_pop = []
 solution = False
-nb_gen = 0
+nb_gen = 1
 BOARD_SIZE= 8
 RDM_SELECT = select_lcount + select_hcount -1
 
@@ -34,7 +34,7 @@ def evaluate(pop: list):
     """
         Sorts the `pop` with each `nbconflict`
     """
-    pop.sort(key=lambda individu: individu.fitness())
+    pop.sort(key=lambda individu: individu.nbconflict)
 
 def selection(pop: list, hcount: int, lcount: int):
     """
@@ -77,7 +77,7 @@ class Individual:
             Constructor of the `Individu` class
         """
         self.list = lst
-        self.nbconflict = 0
+        self.nbconflict = self.fitness()
         
 
     def __str__(self):
