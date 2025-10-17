@@ -1,102 +1,114 @@
 import random
 
-''' CONSTANTES '''
-liste_individu = []
-solution_trouver = False
+''' CONSTANT '''
+list_pop = []
+solution = False
 nb_gen = 0
 
 ''' FUNCTION '''
 
-def create_rand_pop(count: int):
+def create_random_pop(count: int):
+    """
+        Creates a new random population with `count` Individual
+    """
     for _ in range(count):
-        liste_individu.append(Individu([random.randint(0, 7) for _ in range(8)]))
+        list_pop.append(Individual([random.randint(0, 7) for _ in range(8)]))
 
 def evaluate(pop: list):
+    """
+        Sorts the `pop` with each `nbconflict`
+    """
     pop.sort(key=lambda individu: individu.fitness())
 
 def selection(pop: list, hcount: int, lcount: int):
+    """
+        Keeps `hcount` best Individuals of the `pop` list and the `lcount` worst
+    """
     del pop[hcount:len(pop)-lcount]
 
-def croisement(ind1: object, ind2: object):
-    temp1 = ind1.liste.copy()
-    temp2 = ind2.liste.copy()
+def new_generation(ind1: object, ind2: object):
+    """
+        Switches the 4th first numbers on `ind1` with `ind2
+    """
+    temp1 = ind1.list.copy()
+    temp2 = ind2.list.copy()
 
     for i in range(4):
         temp1[i], temp2[i] = temp2[i], temp1[i]
     
-    ind1.liste = temp1.copy()
-    ind2.liste = temp2.copy()
+    ind1.list = temp1.copy()
+    ind2.list = temp2.copy()
 
 def mutation(ind: object):
+    """
+        Changes a random number on the list of `ind`
+    """
     index_rdm = random.randint(0,7)
     nb_rdm = random.randint(0,7)
-    ind.liste[index_rdm] = nb_rdm
+    ind.list[index_rdm] = nb_rdm
 
-
-''' DEBUG FUNCTION '''
-
-def printAllFitness(pop: list):
-    for i in pop:
-        print(i.fitness())
-
-def printListInd(ind):
-    print(ind.liste)
 
 ''' CLASSE '''
 
-class Individu:
+class Individual:
     """
-        Représente chaque configuration de l'échiquier.
-        Pour chaque colonne on indique la ligne où se trouve la reine.
-
-        liste: Représente la position Y des reines dans l'échiquier.
-        nbconflict: Représente le nombre de conflits de la configuration.
+        Represents each configuration of the chessboard.
+        For each column, indicate the row where the queen is located.
     """
     
-    #Constructeur
     def __init__(self, lst: list):
-        self.liste = lst
+        """
+            Constructor of the `Individu` class
+        """
+        self.list = lst
         self.nbconflict = 0
         
 
-    #Afficher la configuration
-    #def __str__(self):
-    #    return 0
+    def __str__(self):
+        return f"There is {self.nbconflict} conflict on this configuration : {self.list}"
 
-    # Vérifier si 2 reines se menacent
-    def conflict(self, col1: int, col2: int):
-        lig1 = self.liste[col1]
-        lig2 = self.liste[col2]
-        if (abs(col1 - col2) == abs(lig1 - lig2) or lig1 == lig2):
+    def conflict(self, queen1: int, queen2: int):
+        """
+            Check if `queen1` and `queen2` are in conflict, 
+            Conflict: 
+                -Same Lines
+                -Same diagonal 
+        """
+        lig1 = self.list[queen1]
+        lig2 = self.list[queen2]
+        if (abs(queen1 - queen2) == abs(lig1 - lig2) or lig1 == lig2):
             return True
         else:
             return False
         
     #Retourne le nombre de conflits
     def fitness(self):
+        """
+            Returns the number of conflicts in a configuration of Individual
+        """
         self.nbconflict = 0
-        for i in range(len(self.liste)):
-            for j in range(i+1, len(self.liste)):
+        for i in range(len(self.list)):
+            for j in range(i+1, len(self.list)):
                 if self.conflict(i, j):
                     self.nbconflict += 1
         return self.nbconflict  
 
 
-''' MAIN PROGRAMME '''   
+''' MAIN PROGRAM '''   
 
-create_rand_pop(25)
+create_random_pop(25)
 
 
-while(solution_trouver == False):
-    print(f"Nous sommes à la génération : {nb_gen}")
-    evaluate(liste_individu)
-    if(liste_individu[0].nbconflict == 0):
-        solution_trouver = True
-        print(f"Un individu de Fitness 0 à été trouvé : {liste_individu[0].liste}, {liste_individu[0].nbconflict} \nEn {nb_gen} génération(s)")
+while(solution == False):
+    print(f"Attempt#{nb_gen}")
+    evaluate(list_pop)
+    if(list_pop[0].nbconflict == 0):
+        solution = True
+        print(f"{list_pop[0]} \nIn {nb_gen} generation(s)")
     else:
-        selection(liste_individu,10,5)
-        croisement(liste_individu[random.randint(0,14)], liste_individu[random.randint(0,14)])
-        mutation(liste_individu[random.randint(0,14)])
+        selection(list_pop,10,5)
+        new_generation(list_pop[random.randint(0,14)], list_pop[random.randint(0,14)])
+        mutation(list_pop[random.randint(0,14)])
     nb_gen += 1
         
     
