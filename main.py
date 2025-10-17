@@ -1,13 +1,17 @@
 import random
 
 ''' CONSTANT '''
-list_pop = []
-solution = False
-nb_gen = 0
+
+    # Parametters
 nb_pop = 25
 select_hcount = 5
 select_lcount = 5
-rdm_select = select_lcount + select_hcount -1
+
+    # Don't touch this
+list_pop = []
+solution = False
+nb_gen = 0
+RDM_SELECT = select_lcount + select_hcount -1
 
 ''' FUNCTION '''
 
@@ -16,14 +20,14 @@ def fillPop(pop ,count: int):
         Refills `pop` with random Individuals while length of `pop` < `count`
     """
     while(len(pop) <= count):
-        pop.append(Individual([random.randint(0, 7) for _ in range(8)]))
+        pop.append(Individual(random.sample(range(8),8)))
 
 def create_random_pop(count: int):
     """
         Creates a new random population with `count` Individual
     """
     for _ in range(count):
-        list_pop.append(Individual([random.randint(0, 7) for _ in range(8)]))
+        list_pop.append(Individual(random.sample(range(8),8)))
 
 def evaluate(pop: list):
     """
@@ -118,8 +122,8 @@ while(not solution):
         print(f"{list_pop[0]} \nIn {nb_gen} generation(s)")
     else:
         selection(list_pop,select_hcount,select_lcount)
-        new_generation(list_pop[random.randint(0,rdm_select)], list_pop[random.randint(0,rdm_select)])
-        mutation(list_pop[random.randint(0,rdm_select)])
+        new_generation(list_pop[random.randint(0,RDM_SELECT)], list_pop[random.randint(0,RDM_SELECT)])
+        mutation(list_pop[random.randint(0,RDM_SELECT)])
         fillPop(list_pop, nb_pop)
     nb_gen += 1
         
