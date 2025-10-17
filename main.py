@@ -5,7 +5,6 @@ list_pop = []
 solution = False
 nb_gen = 0
 nb_pop = 25
-simple_algo = False
 
 ''' FUNCTION '''
 
@@ -118,8 +117,7 @@ while(not solution):
         selection(list_pop,10,5)
         new_generation(list_pop[random.randint(0,14)], list_pop[random.randint(0,14)])
         mutation(list_pop[random.randint(0,14)])
-        if not simple_algo:
-            fillPop(list_pop, nb_pop)
+        fillPop(list_pop, nb_pop)
     nb_gen += 1
         
     
