@@ -11,6 +11,7 @@ select_lcount = 5
 list_pop = []
 solution = False
 nb_gen = 0
+BOARD_SIZE= 8
 RDM_SELECT = select_lcount + select_hcount -1
 
 ''' FUNCTION '''
@@ -20,14 +21,14 @@ def fillPop(pop ,count: int):
         Refills `pop` with random Individuals while length of `pop` < `count`
     """
     while(len(pop) <= count):
-        pop.append(Individual(random.sample(range(8),8)))
+        pop.append(Individual(random.sample(range(BOARD_SIZE),BOARD_SIZE)))
 
 def create_random_pop(count: int):
     """
         Creates a new random population with `count` Individual
     """
     for _ in range(count):
-        list_pop.append(Individual(random.sample(range(8),8)))
+        list_pop.append(Individual(random.sample(range(BOARD_SIZE),BOARD_SIZE)))
 
 def evaluate(pop: list):
     """
