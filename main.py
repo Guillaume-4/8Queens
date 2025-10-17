@@ -5,6 +5,9 @@ list_pop = []
 solution = False
 nb_gen = 0
 nb_pop = 25
+select_hcount = 5
+select_lcount = 5
+rdm_select = select_lcount + select_hcount -1
 
 ''' FUNCTION '''
 
@@ -114,9 +117,9 @@ while(not solution):
         solution = True
         print(f"{list_pop[0]} \nIn {nb_gen} generation(s)")
     else:
-        selection(list_pop,10,5)
-        new_generation(list_pop[random.randint(0,14)], list_pop[random.randint(0,14)])
-        mutation(list_pop[random.randint(0,14)])
+        selection(list_pop,select_hcount,select_lcount)
+        new_generation(list_pop[random.randint(0,rdm_select)], list_pop[random.randint(0,rdm_select)])
+        mutation(list_pop[random.randint(0,rdm_select)])
         fillPop(list_pop, nb_pop)
     nb_gen += 1
         
