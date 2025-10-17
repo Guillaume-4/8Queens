@@ -4,8 +4,17 @@ import random
 list_pop = []
 solution = False
 nb_gen = 0
+nb_pop = 25
+simple_algo = False
 
 ''' FUNCTION '''
+
+def fillPop(pop ,count: int):
+    """
+        Refills `pop` with random Individuals while length of `pop` < `count`
+    """
+    while(len(pop) <= count):
+        pop.append(Individual([random.randint(0, 7) for _ in range(8)]))
 
 def create_random_pop(count: int):
     """
@@ -96,10 +105,10 @@ class Individual:
 
 ''' MAIN PROGRAM '''   
 
-create_random_pop(25)
+create_random_pop(nb_pop)
 
 
-while(solution == False):
+while(not solution):
     print(f"Attempt#{nb_gen}")
     evaluate(list_pop)
     if(list_pop[0].nbconflict == 0):
@@ -109,6 +118,8 @@ while(solution == False):
         selection(list_pop,10,5)
         new_generation(list_pop[random.randint(0,14)], list_pop[random.randint(0,14)])
         mutation(list_pop[random.randint(0,14)])
+        if not simple_algo:
+            fillPop(list_pop, nb_pop)
     nb_gen += 1
         
     
