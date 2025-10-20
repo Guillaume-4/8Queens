@@ -45,7 +45,7 @@ def selection(pop: list[object], hcount: int, lcount: int):
 
 def new_generation(ind1: object, ind2: object):
     """
-        Switches the 4th first numbers on `ind1` with `ind2
+        Switches the 4th first numbers on `ind1` with `ind2`
     """
     temp1 = ind1.list.copy()
     temp2 = ind2.list.copy()
