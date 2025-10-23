@@ -49,6 +49,8 @@ def new_generation(ind1: object, ind2: object):
     """
     for i in range(4):
         ind1.list[i], ind2.list[i] = ind2.list[i], ind1.list[i]
+    ind1.fitness()
+    ind2.fitness()
     
 def mutation(ind: object):
     """
@@ -57,6 +59,7 @@ def mutation(ind: object):
     index_rdm = random.randint(0,7)
     nb_rdm = random.randint(0,7)
     ind.list[index_rdm] = nb_rdm
+    ind.fitness()
 
 def checkSolution(allSolution : list[object], solutionToCheck: object):
     """
