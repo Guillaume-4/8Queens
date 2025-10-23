@@ -3,7 +3,7 @@ import random
 ''' CONSTANT '''
 
     # Parametters
-nb_pop = 25
+nb_pop = 20
 select_hcount = 5
 select_lcount = 5
 BOARD_SIZE= 8
@@ -47,15 +47,9 @@ def new_generation(ind1: object, ind2: object):
     """
         Switches the 4th first numbers on `ind1` with `ind2`
     """
-    temp1 = ind1.list.copy()
-    temp2 = ind2.list.copy()
-
     for i in range(4):
-        temp1[i], temp2[i] = temp2[i], temp1[i]
+        ind1.list[i], ind2.list[i] = ind2.list[i], ind1.list[i]
     
-    ind1.list = temp1.copy()
-    ind2.list = temp2.copy()
-
 def mutation(ind: object):
     """
         Changes a random number on the list of `ind`
@@ -103,7 +97,7 @@ def findAllSolution():
         Looking for all solution of 8 queens problems 
     """
     global list_all_solution, nb_pop
-    while(True):
+    while(len(list_all_solution) != 92):
         print(f"Numbers of solutions find : {len(list_all_solution)}")
         temp_solution = findSolution(False)
         if not checkSolution(list_all_solution, temp_solution):
