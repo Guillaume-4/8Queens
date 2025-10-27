@@ -29,18 +29,6 @@ text
 
 Tu peux également modifier le script pour adapter à d'autres variantes du problème N-Queens.
 
-## Exemple
-
-Solution 1:
-. . . Q . . . .
-. . . . . Q . .
-Q . . . . . . .
-. . . . . . Q .
-. Q . . . . . .
-. . . . Q . . .
-. . Q . . . . .
-. . . . . . . Q
-
 
 ## Pourquoi ce projet ?
 
