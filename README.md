@@ -12,10 +12,10 @@ Ce projet propose une solution au problème des 8 reines en Python. Le problème
 
 ## Installation
 
+```shell
 git clone https://github.com/Guillaume-4/8Queens.git
 cd 8Queens
-
-text
+```
 
 Assure-toi d'avoir Python installé (>= 3.7).
 
@@ -23,9 +23,9 @@ Assure-toi d'avoir Python installé (>= 3.7).
 
 Lance le script principal pour générer et afficher les solutions :
 
+```shell
 python 8queens.py
-
-text
+```
 
 Tu peux également modifier le script pour adapter à d'autres variantes du problème N-Queens.
 
