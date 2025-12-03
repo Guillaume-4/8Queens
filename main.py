@@ -68,7 +68,7 @@ def mutation(ind: object):
     ind.fitness()
 
 
-def checkSolution(allSolution: list[object], solutionToCheck: object):
+def checkSolution(allSolution: list[object], solutionToCheck: object) -> bool:
     """
     Checks if a `solutionToCheck` is in `allSolution` list
     """
@@ -137,7 +137,7 @@ class Individual:
             f"There is {self.nbconflict} conflict on this configuration : {self.list}"
         )
 
-    def conflict(self, queen1: int, queen2: int):
+    def conflict(self, queen1: int, queen2: int) -> bool:
         """
         Check if `queen1` and `queen2` are in conflict,
         Conflict:
@@ -152,7 +152,7 @@ class Individual:
             return False
 
     # Retourne le nombre de conflits
-    def fitness(self):
+    def fitness(self) -> int:
         """
         Returns the number of conflicts in a configuration of Individual
         """
